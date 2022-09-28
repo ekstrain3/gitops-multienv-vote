@@ -5,16 +5,15 @@
 #
 export AWS_PROFILE=default
 export PROJECT_NAME=multienv-vote
-export AWS_REGION=eu-west-3
+export AWS_REGION=us-east-1
 # the directory containing the script file
-export PROJECT_DIR="$(cd "$(dirname "$0")"; pwd)"
+export PROJECT_DIR="/Users/aospina/Documents/Gitlab/gitops-multienv-vote"
 
 
 log()   { echo -e "\e[30;47m ${1^^} \e[0m ${@:2}"; }        # $1 uppercase background white
 info()  { echo -e "\e[48;5;28m ${1^^} \e[0m ${@:2}"; }      # $1 uppercase background green
 warn()  { echo -e "\e[48;5;202m ${1^^} \e[0m ${@:2}" >&2; } # $1 uppercase background orange
 error() { echo -e "\e[48;5;196m ${1^^} \e[0m ${@:2}" >&2; } # $1 uppercase background red
-
 # https://unix.stackexchange.com/a/22867
 export -f log info warn error
 

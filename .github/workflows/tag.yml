@@ -1,15 +1,19 @@
 # when a tag is pushed, create an ecr repository and build + push the image
 name: tag
 
-on:  
+on:
   push:
     # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#running-your-workflow-only-when-a-push-of-specific-tags-occurs
     tags: [ "v*.*.*" ]
 
-env: 
-  AWS_REGION: eu-west-3
-  ECR_REPOSITORY: multienv-vote
-  
+env:
+  AWS_REGION: us-east-1
+  ECR_REPOSITORY: lw-pc-ct-eks
+
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,16 +25,16 @@ jobs:
         echo github.ref_type: ${{ github.ref_type }}
         echo github.ref_name: ${{ github.ref_name }}
         echo github.sha: ${{ github.sha }}
-        
-    - name: Clone
-      uses: actions/checkout@v2
 
-    - name: Configure AWS credentials
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ env.AWS_REGION }}
+        aws-region: us-east-1
+        role-to-assume: ${{secrets.OIDC_ROLE}}
+        role-session-name: OIDCSession
 
     - name: Create repository
       # https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ecr/create-repository.html
