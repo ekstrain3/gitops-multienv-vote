@@ -11,6 +11,10 @@ env:
   # https://stackoverflow.com/a/62293570
   ECR_REPOSITORY: multienv-vote-${{ github.event.ref }}
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   delete:
     if: github.event.ref_type == 'branch'
@@ -23,12 +27,12 @@ jobs:
           echo github.ref_name: ${{ github.ref_name }}
           echo github.sha: ${{ github.sha }}
 
-      - name: Configure AWS credentials
+      - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
+          aws-region: us-east-1
+          role-to-assume: ${{secrets.OIDC_ROLE}}
+          role-session-name: OIDCSession
 
       - name: Delete repository
         run: |
