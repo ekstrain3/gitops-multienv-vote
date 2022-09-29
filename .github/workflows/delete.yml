@@ -5,7 +5,7 @@ name: branch deleted
 on: delete
 
 env:
-  AWS_REGION: eu-west-3
+  AWS_REGION: us-east-1
   # /!\ on master branch, to get the name of an other deleted branch,
   # you need to get { github.event.ref } instead of { github.ref_name }
   # https://stackoverflow.com/a/62293570
