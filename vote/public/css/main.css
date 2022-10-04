@@ -57,10 +57,11 @@ footer {
 
     /* uncomment below to create feature-one */
 
-    color: rgba(119, 220, 18, 0.275);
+    color: grey;
     background-color: #eceff1;
-    border: #b4211c 1px dashed;
+    border: grey 1px solid;
     padding: .7em;
+  }
 
 }
 
