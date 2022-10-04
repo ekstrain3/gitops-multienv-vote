@@ -44,14 +44,10 @@ jobs:
         role-to-assume: ${{secrets.OIDC_ROLE}}
         role-session-name: OIDCSession
 
-    - name: Create repository
-      # https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ecr/create-repository.html
-      run: |
-        aws ecr create-repository \
-          --repository-name ${{ env.ECR_REPOSITORY }} \
-          --query 'repository.repositoryUri' \
-          --output text \
-          2>/dev/null
+    - name: Create ECR repo if missing
+      uses: byu-oit/github-action-create-ecr-repo-if-missing@v1
+      with:
+        DOCKER_REPO_NAME: ${{ env.ECR_REPOSITORY }} # Your repo name goes here
 
     - name: Login to Amazon ECR
       id: login-ecr
