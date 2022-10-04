@@ -42,5 +42,6 @@ jobs:
           aws ecr delete-repository \
             --repository-name ${{ env.ECR_REPOSITORY }} \
             --query 'repository.repositoryUri' \
+            --force
             --output text \
             2>/dev/null
