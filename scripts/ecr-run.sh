@@ -7,7 +7,7 @@ ecr-run() {
             --output text \
             2>/dev/null > "$PROJECT_DIR/.env_ACCOUNT_ID"
     fi
-    
+
     ACCOUNT_ID=$(cat "$PROJECT_DIR/.env_ACCOUNT_ID")
     log ACCOUNT_ID $ACCOUNT_ID
 
@@ -17,7 +17,7 @@ ecr-run() {
         --profile $AWS_PROFILE \
         | docker login \
         --username AWS \
-        --password-stdin $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+        --password-stdin 016194978976.dkr.ecr.us-east-1.amazonaws.com
 
     # get the first feature repository (so, everything except master branch)
     REPOSITORY_NAME=$(aws ecr describe-repositories \
@@ -35,7 +35,7 @@ ecr-run() {
     #     2>/dev/null)
     # log IMAGE_TAG $IMAGE_TAG
 
-    REPOSITORY_URI=$ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPOSITORY_NAME
+    REPOSITORY_URI=016194978976.dkr.ecr.us-east-1.amazonaws.com/$REPOSITORY_NAME
     log REPOSITORY_URI $REPOSITORY_URI
 
     docker run \
