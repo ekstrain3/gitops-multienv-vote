@@ -8,7 +8,7 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  ECR_REPOSITORY: lw-ps-ct-eks-10-4-22
+  ECR_REPOSITORY: multienv-vote-master
 
 permissions:
   id-token: write

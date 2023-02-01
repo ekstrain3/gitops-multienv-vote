@@ -69,4 +69,3 @@ jobs:
           --tag ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:latest \
           .
         docker push --all-tags ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}
-
